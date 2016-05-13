@@ -44,9 +44,8 @@
         }
     }
 
-    function dna_module_form_submit($form, &$form_state) {
-        $input_string = $form_state['values']['input'];
-        $exploded_string = str_split($input_string);
+    function make_dna($input) {
+        $exploded_string = str_split($input);
 
         $result =  array();
         foreach($exploded_string as $letter) {
@@ -65,8 +64,15 @@
         }
 
         $result = implode(" ", $result);
+        return $result;
+    }
 
-        $_SESSION['dna_module_input_array'] = str_split($input_string);
+    function dna_module_form_submit($form, &$form_state) {
+        $input = $form_state['values']['input'];
+
+        $result = make_dna($input);
+
+        $_SESSION['dna_module_input_array'] = str_split($input);
         $_SESSION['dna_module_output'] = $result;
         $form_state['redirect'] = 'dna_success';
     }
