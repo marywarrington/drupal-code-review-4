@@ -35,8 +35,12 @@
 
 
     function element_validate_letters($element) {
-        if (strtolower($element['#value']) != 'a' && strtolower($element['#value']) != 't' && strtolower($element['#value']) != 'c' && strtolower($element['#value']) != 'g' ) {
-            form_error($element, t("Please only use the letters 'a', 't', 'c', and 'g'."));
+        $input_string = strtolower($element['#value']);
+        $exploded_string = str_split($input_string);
+        foreach ($exploded_string as $letter) {
+            if ($letter != 'a' && $letter != 't' && $letter != 'c' && $letter != 'g') {
+                form_error($element, t("Please only use the letters 'a', 't', 'c', and 'g'."));
+            }
         }
     }
 
@@ -62,11 +66,13 @@
 
         $result = implode(" ", $result);
 
+        $_SESSION['dna_module_input'] = $input_string;
         $_SESSION['dna_module_output'] = $result;
         $form_state['redirect'] = 'dna_success';
     }
 
     function dna_module_success() {
+        $input = $_SESSION['dna_module_input'];
         $results = $_SESSION['dna_module_output'];
-        return $results;
+        return '<div>' . $input . '</div>' . '<div>' . $results . '</div>';
 }
