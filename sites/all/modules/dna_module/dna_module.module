@@ -1,0 +1,64 @@
+<?php
+
+function dna_module_menu() {
+    $items = array();
+    $items['dna_module'] = array(
+        'title' => 'DNA Module',
+        'type' => MENU_NORMAL_ITEM,
+        'access callback' => TRUE,
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dna_module_form'),
+    );
+    $items['dna_success'] = array(
+        'title' => 'DNA Module Success',
+        'type' => MENU_CALLBACK,
+        'access callback' => TRUE,
+        'page callback' => 'dna_module_success',
+    );
+    return $items;
+}
+
+function dna_module_form() {
+    $form = array();
+    $form['input'] = array(
+        '#title' => 'Input',
+        '#type' => 'textfield',
+        '#description' => t('Please enter your nuceleotide sequence!'),
+    );
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Double helix me!'
+    );
+    return $form;
+}
+
+function dna_module_form_submit($form, &$form_state) {
+    $input_string = $form_state['values']['input'];
+    $exploded_string = str_split($input_string);
+
+    $result =  array();
+    foreach($exploded_string as $letter) {
+        if (strtolower($letter) == 'a') {
+            array_push($result, 't');
+        }
+        if (strtolower($letter) == 't') {
+            array_push($result, 'a');
+        }
+        if (strtolower($letter) == 'c') {
+            array_push($result, 'g');
+        }
+        if (strtolower($letter) == 'g') {
+            array_push($result, 'c');
+        }
+    }
+
+    $result = implode(" ", $result);
+
+    $_SESSION['dna_module_output'] = $result;
+    $form_state['redirect'] = 'dna_success';
+}
+
+function dna_module_success() {
+    $results = $_SESSION['dna_module_output'];
+    return $results;
+}
