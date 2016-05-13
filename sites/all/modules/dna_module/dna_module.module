@@ -80,5 +80,5 @@
     function dna_module_success() {
         $input = implode(" ", $_SESSION['dna_module_input_array']);
         $results = $_SESSION['dna_module_output'];
-        return '<div>' . $input . '</div>' . '<div>' . $results . '</div>';
+        return '<h2>' . 'Here is your completed double helix!' . '</h2>' . '<div>' . $input . '</div>' . '<div>' . $results . '</div>';
 }
