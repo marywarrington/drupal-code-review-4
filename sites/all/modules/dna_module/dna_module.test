@@ -45,6 +45,12 @@ class DnaModuleTestCase extends DrupalUnitTestCase
         $expected_output = 'c';
         $this->assertEqual($result, $expected_output, $description);
 
+        $description = "A string of multiple letters will all convert";
+        $input = 'agct';
+        $result = make_dna($input);
+        $expected_output = 't c g a';
+        $this->assertEqual($result, $expected_output, $description);
+
     }
 
 }
