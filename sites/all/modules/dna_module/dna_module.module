@@ -66,13 +66,13 @@
 
         $result = implode(" ", $result);
 
-        $_SESSION['dna_module_input'] = $input_string;
+        $_SESSION['dna_module_input_array'] = str_split($input_string);
         $_SESSION['dna_module_output'] = $result;
         $form_state['redirect'] = 'dna_success';
     }
 
     function dna_module_success() {
-        $input = $_SESSION['dna_module_input'];
+        $input = implode(" ", $_SESSION['dna_module_input_array']);
         $results = $_SESSION['dna_module_output'];
         return '<div>' . $input . '</div>' . '<div>' . $results . '</div>';
 }
