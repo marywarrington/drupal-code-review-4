@@ -1,0 +1,50 @@
+<?php
+class DnaModuleTestCase extends DrupalUnitTestCase
+{
+
+    public static function getInfo()
+    {
+        return array(
+        'name' => 'DNA Module Tests',
+        'description' => 'Test that my dna_module converter works properly.',
+        'group' => 'Epicodus Examples Tests',
+        );
+    }
+
+    function testDnaModule()
+    {
+
+        //English description
+        $description = "An 'a' returns the value 't' ";
+
+        //Arrange
+        $input = 'a';
+
+        //Act
+        $result = make_dna($input);
+
+        //Assert
+        $expected_output = 't';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = "A 't' returns the value 'a' ";
+        $input = 't';
+        $result = make_dna($input);
+        $expected_output = 'a';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = "A 'c' returns the value 'g' ";
+        $input = 'c';
+        $result = make_dna($input);
+        $expected_output = 'g';
+        $this->assertEqual($result, $expected_output, $description);
+
+        $description = "A 'g' returns the value 'c' ";
+        $input = 'g';
+        $result = make_dna($input);
+        $expected_output = 'c';
+        $this->assertEqual($result, $expected_output, $description);
+
+    }
+
+}

@@ -1,0 +1,7 @@
+name = DNA Module
+description = Returns the matching DNA string
+package = Epicodus Examples
+core = 7.x
+files[] = dna_module.module
+files[] = dna_module.test
+dependencies[] = simpletest
