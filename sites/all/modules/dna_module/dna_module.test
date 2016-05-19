@@ -70,8 +70,9 @@ class DnaModuleTests extends DrupalWebTestCase {
     }
 
     public function testDnaModuleNavigation() {
-        // Navigate to the URL created by the DNA Module.
-        $this->drupalGet('dna_success');
+        $info['input'] = "agct";
+        $this->drupalPost('/dna_module', $info, t('Double helix me!'));
+
         // Assert that the text we want to see if actually there on the page.
         $this->assertText('DNA Module Success', 'The text on the page is correct.');
     }
